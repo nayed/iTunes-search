@@ -12,9 +12,10 @@ export default class App extends React.Component {
     }
 
     showResults(response) {
-        this.state = {
-            searchResults: this.state.searchResults.push(response.results)
-        }
+        let searchResults = this.state.searchResults
+        searchResults.push(response.results)
+        
+        this.setState({searchResults: searchResults})
     }
 
     search(URL) {
@@ -33,11 +34,10 @@ export default class App extends React.Component {
     }
     
     render() {
-        console.log(this.state)
         return (
             <div>
                 <SearchBox />
-                <Results />
+                <Results searchResults={this.state.searchResults} />
             </div>
         )
     }
