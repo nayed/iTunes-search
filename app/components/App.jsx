@@ -24,19 +24,24 @@ export default class App extends React.Component {
             dataType: 'jsonp',
             url: URL,
             success: function(response) {
+                console.log(this)
                 this.showResults(response)
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(status, err)
             }.bind(this)
         })
     }
 
-    componentDidMount() {
-        this.search('https://itunes.apple.com/search?term=fun')
-    }
+    /*componentDidMount() {
+        //this.search('https://itunes.apple.com/search?term=fun')
+    }*/
     
     render() {
+        
         return (
             <div>
-                <SearchBox />
+                <SearchBox search={this.search.bind(this)} />
                 <Results searchResults={this.state.searchResults} />
             </div>
         )
